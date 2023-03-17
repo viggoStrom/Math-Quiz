@@ -68,7 +68,7 @@ section {
     flex-flow: column nowrap;
     align-items: center;
 
-    height: 85vh;
+    height: 100vh;
 }
 
 section h1 {
@@ -113,4 +113,41 @@ section .levelSelectArea a p {
 
 section .levelSelectArea a:hover {
     scale: 1.05;
+}
+
+section p {
+    max-width: 45vw;
+}
+
+#about {
+    margin-bottom: 8vh;
+}
+
+footer {
+    background-color: rgb(75, 75, 75);
+    height: 50vh;
+
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 1rem;
+    padding-top: 5vh;
+    padding-left: 15vw;
+}
+
+footer a {
+    color: white;
+    text-decoration: none;
+}
+
+footer #socials a img {
+    max-height: 4vw;
+    min-height: 5vh;
+
+    filter: invert();
+}
+
+footer #socials {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1vw;
 }
