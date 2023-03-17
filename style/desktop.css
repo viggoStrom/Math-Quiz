@@ -6,6 +6,8 @@ body {
     margin: 0;
     padding: 0;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+    user-select: none;
 }
 
 header #logo {
@@ -50,7 +52,6 @@ header .selectedNav {
 }
 
 header nav a {
-
     text-decoration: none;
     color: inherit;
     font-size: 1.5rem;
@@ -83,6 +84,10 @@ section #shuffleButton {
     scale: 1.3;
 }
 
+section #shuffleButton:hover {
+    opacity: .8;
+}
+
 section .levelSelectArea {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -103,4 +108,9 @@ section .levelSelectArea a {
 
 section .levelSelectArea a p {
     font-size: 1.5rem;
+    margin: 1rem;
+}
+
+section .levelSelectArea a:hover {
+    scale: 1.05;
 }
