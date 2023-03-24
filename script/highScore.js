@@ -21,8 +21,6 @@ refreshScore()
 
 
 
-
-
 // debug
 document.addEventListener("keydown", event => {
     if (event.key == "u") {

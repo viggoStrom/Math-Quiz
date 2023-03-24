@@ -176,10 +176,18 @@ footer #socials {
 .answers a {
     align-items: unset;
 }
+.answers a p:last-of-type {
+    font-size: 2.5rem;
+}
 
 .level h1 {
     margin: 1rem;
+    margin-bottom: .5rem;
+}
+.level p:first-of-type{
+    margin: 0;
 }
 .level h2 {
     margin: 5rem;
+    font-weight: normal;
 }
