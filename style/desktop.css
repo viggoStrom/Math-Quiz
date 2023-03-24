@@ -88,6 +88,7 @@ section #shuffleButton:hover {
     opacity: .8;
 }
 
+.answers,
 section .levelSelectArea {
     display: grid;
     grid-template-columns: auto auto auto;
@@ -95,28 +96,43 @@ section .levelSelectArea {
     gap: 1vw;
 }
 
+.answers a,
 section .levelSelectArea a {
     height: 20vh;
-    aspect-ratio: 1.2/1;
+    aspect-ratio: 1.1/1;
     text-align: center;
 
     border: 1px solid black;
     border-radius: 10%;
 
     cursor: pointer;
+
+    text-decoration: none;
+    color: black;
+
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    align-items: center;
 }
 
+.answers a p,
 section .levelSelectArea a p {
-    font-size: 1.5rem;
-    margin: 1rem;
+    font-size: 1.6rem;
+    margin: 0rem;
 }
 
+section .levelSelectArea a p:last-of-type {
+    font-size: 1.1rem;
+}
+
+.answers a:hover,
 section .levelSelectArea a:hover {
     scale: 1.05;
 }
 
-section p {
-    max-width: 45vw;
+section .about {
+    max-width: 40vw;
 }
 
 #about {
@@ -150,4 +166,20 @@ footer #socials {
     display: flex;
     flex-flow: row nowrap;
     gap: 1vw;
+}
+
+.answers a p:first-of-type {
+    text-align: left;
+    padding-left: .3rem;
+}
+
+.answers a {
+    align-items: unset;
+}
+
+.level h1 {
+    margin: 1rem;
+}
+.level h2 {
+    margin: 5rem;
 }
