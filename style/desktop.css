@@ -120,10 +120,12 @@ section .levelSelectArea a {
 section .levelSelectArea a p {
     font-size: 1.6rem;
     margin: 0rem;
+    line-height: .7;
 }
 
 section .levelSelectArea a p:last-of-type {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    font-weight: lighter;
 }
 
 .answers a:hover,
@@ -171,11 +173,14 @@ footer #socials {
 .answers a p:first-of-type {
     text-align: left;
     padding-left: .3rem;
+    padding-top: .3rem;
+    font-size: 1.3rem;
 }
 
 .answers a {
     align-items: unset;
 }
+
 .answers a p:last-of-type {
     font-size: 2.5rem;
 }
@@ -184,9 +189,11 @@ footer #socials {
     margin: 1rem;
     margin-bottom: .5rem;
 }
-.level p:first-of-type{
+
+.level p:first-of-type {
     margin: 0;
 }
+
 .level h2 {
     margin: 5rem;
     font-weight: normal;
