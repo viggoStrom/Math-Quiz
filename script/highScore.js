@@ -19,9 +19,7 @@ refreshScore()
 
 
 
-
-
-// debug
+// debug 
 document.addEventListener("keydown", event => {
     if (event.key == "u") {
         let score = parseInt(localStorage.getItem(scores[0].className))

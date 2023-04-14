@@ -135,10 +135,24 @@ section .levelSelectArea a:hover {
 
 section .about {
     max-width: 40vw;
+    padding-left: 10vw;
+    padding-right: 10vw;
 }
 
 #about {
     margin-bottom: 8vh;
+    text-align: center;
+}
+
+#aboutSection {
+    background-color: rgb(199, 199, 199);
+}
+
+#aboutWrapper {
+    background-color: white;
+    height: 100%;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
 }
 
 footer {
@@ -150,6 +164,8 @@ footer {
     gap: 1rem;
     padding-top: 5vh;
     padding-left: 15vw;
+
+    border-top: 1px solid black;
 }
 
 footer a {
@@ -186,8 +202,9 @@ footer #socials {
 }
 
 .level h1 {
-    margin: 1rem;
-    margin-bottom: .5rem;
+    margin: 2vh;
+    margin-bottom: 1vh;
+    font-size: 2rem;
 }
 
 .level p:first-of-type {
@@ -195,6 +212,7 @@ footer #socials {
 }
 
 .level h2 {
-    margin: 5rem;
+    margin: 10vh;
     font-weight: normal;
+    font-size: 2rem;
 }
