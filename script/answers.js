@@ -53,6 +53,7 @@ let currentQuestion = 0
 //     { question: "5×6=?", answers: ["30", "36", "24", "28", "25", "20"], correctAnswerIndex: 0 },
 //     { question: "7×4=?", answers: ["28", "32", "24", "22", "20", "16"], correctAnswerIndex: 0 },
 //     { question: "9×6=?", answers: ["54", "48", "63", "45", "36", "27"], correctAnswerIndex: 0 },
+// ]
 
 
 const addQuestionGenerator = () => {
@@ -70,8 +71,15 @@ const addQuestionGenerator = () => {
     const number2 = randomNumber(10)
     const answer = number1 + number2
 
+    for (let index = 0; index < question.answers.length; index++) {
+        question.answers[index] = randomNumber(10)
+        while (question.answers[index] == answer) {
+            question.answers[index] = randomNumber(10)
+        }
+    }
+
     question.question = `${number1}+${number2}=?`
-    question.correctAnswerIndex = randomNumber(6)
+    question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
     return question
 }
@@ -100,6 +108,7 @@ const addSubQuestionGenerator = () => {
         return addQuestionGenerator()
     }
     else {
+        return addQuestionGenerator()
         return subQuestionGenerator()
     }
 }
@@ -119,55 +128,63 @@ const multQuestionGenerator = () => {
     const answer = number1 * number2
 
     question.question = `${number1}×${number2}=?`
-    question.correctAnswerIndex = randomNumber(6)
+    question.correctAnswerIndex = randomNumber(6) - 1
     question.answers[question.correctAnswerIndex] = answer
     return question
 }
 
-// ]
 
 
 
-const addOnclick = (questionGenerator) => {
+const addOnclick = () => {
     // give all the a tags the onclick attribute
     aTags.forEach(element => {
-        element.setAttribute("onclick", `checkAnswer(event, ${questionGenerator})`)
+        element.setAttribute("onclick", `checkAnswer(event)`)
     })
+}
+
+const setCurrentQuestion = (question) => {
+    window.localStorage.setItem("currentQuestion", JSON.stringify(question))
+}
+const getCurrentQuestion = () => {
+    return JSON.parse(window.localStorage.getItem("currentQuestion"))
 }
 
 const promptQuestion = (question) => {
+    setCurrentQuestion(question)
+
     // refresh question
-    questionElement.innerHTML = question.question
+    questionElement.innerHTML = getCurrentQuestion().question
 
     // refresh awnser alternatives so they're correct
-    answers.forEach(element => {
-        element.innerHTML = question.answers[parseInt(element.className) - 1]
-    })
+    for (let index = 0; index < answers.length; index++) {
+        answers[index].innerHTML = getCurrentQuestion().answers[index]
+    }
 }
 
-const checkAnswer = (event, generatedQuestion) => {
-    const response = generatedQuestion.answers[parseInt(event.srcElement.className) - 1]
-    const correctAnswer = generatedQuestion.answers[generatedQuestion.correctAnswerIndex]
+const checkAnswer = (event) => {
+    const response = parseInt(getCurrentQuestion().answers[parseInt(event.srcElement.className) - 1])
+    const correctAnswer = parseInt(getCurrentQuestion().answers[getCurrentQuestion().correctAnswerIndex])
 
     if (response == parseInt(correctAnswer)) {
         console.log("correct answer");
         currentScore++;
         currentScoreElement.innerHTML = currentScore
 
-        // continuously update the localstorage in case of missclick out of page which would otherwise not save score 
+        // continuously update the window.localStorage in case of missclick out of page which would otherwise not save score 
         const level = document.getElementsByClassName("level")[0].classList[1]
-        if (localStorage.getItem(level) < currentScore) {
-            localStorage.setItem(level, currentScore)
+        if (window.localStorage.getItem(level) < currentScore) {
+            window.localStorage.setItem(level, currentScore)
         }
 
-        promptQuestion(generatedQuestion)
+        promptQuestion(eval(document.getElementById("questionGenerator").innerHTML))
 
     } else {
         // lose state
         const level = document.getElementsByClassName("level")[0].classList[1]
 
-        if (localStorage.getItem(level) < currentScore) {
-            localStorage.setItem(level, currentScore)
+        if (window.localStorage.getItem(level) < currentScore) {
+            window.localStorage.setItem(level, currentScore)
             window.alert(`You lost. New highscore!: ${currentScore}`)
         }
         else {
@@ -183,3 +200,7 @@ const checkAnswer = (event, generatedQuestion) => {
         })
     }
 }
+
+// window.onbeforeunload = function(event) {
+//     return "string"
+// };
