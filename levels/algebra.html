@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Cruncher</title>
+
+    <link rel="stylesheet" href="../style/desktop.css">
+
+    <link rel="shortcut icon" href="../assets/favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <header>
+        <a href="../index.html">
+            <div id="logo">
+                <img src="../assets/logo.png" alt="logo">
+            </div>
+        </a>
+
+        <nav>
+            <a href="../index.html">Play</a>
+            <a href="../aboutUs.html">About Us</a>
+        </nav>
+    </header>
+
+    <section class="level levelSixScore">
+        <h1>÷</h1>
+        <p>Score: <span id="score">0</span></p>
+
+        <h2 id="question">1÷1=?</h2>
+
+        <div class="answers">
+            <a class="1" tabindex="1">
+                <p class="1">1.</p>
+                <p class="1">...</p>
+            </a>
+            <a class="2" tabindex="2">
+                <p class="2">2.</p>
+                <p class="2">...</p>
+            </a>
+            <a class="3" tabindex="3">
+                <p class="3">3.</p>
+                <p class="3">...</p>
+            </a>
+            <a class="4" tabindex="4">
+                <p class="4">4.</p>
+                <p class="4">...</p>
+            </a>
+            <a class="5" tabindex="5">
+                <p class="5">5.</p>
+                <p class="5">...</p>
+            </a>
+            <a class="6" tabindex="6">
+                <p class="6">6.</p>
+                <p class="6">...</p>
+            </a>
+        </div>
+
+        <script src="../script/answers.js" onload="promptQuestion(algebraQuestionGenerator()); addOnclick()"></script>
+        <p id="questionGenerator" style="display: none;">algebraQuestionGenerator()</p>
+    </section>
+
+    <footer>
+        <a href="https://www.pandadoc.com/license-agreement-template/">
+            Licensing
+        </a>
+        <a href="https://www.whitefuse.com/blog/data-protection-policy-template">
+            Data Collection Policy
+        </a>
+        <a href="https://www.privacypolicytemplate.net/">
+            Privacy Policy
+        </a>
+
+        <div id="socials">
+            <a href="https://www.facebook.com/">
+                <!-- img from https://www.iconfinder.com/icons/5282541/fb_social_media_facebook_facebook_logo_social_network_icon -->
+                <img src="../assets/socialMedia/5282541_fb_social media_facebook_facebook logo_social network_icon.png" alt="Facebook">
+            </a>
+            <a href="https://www.twitter.com/">
+                <!-- img from https://www.iconfinder.com/icons/5282551/tweet_twitter_twitter_logo_icon -->
+                <img src="../assets/socialMedia/5282551_tweet_twitter_twitter logo_icon.png" alt="Twitter">
+            </a>
+            <a href="https://www.youtube.com/">
+                <!-- img from https://www.iconfinder.com/icons/5282548/play_player_video_youtube_youtuble_logo_icon -->
+                <img src="../assets/socialMedia/5282548_play_player_video_youtube_youtuble logo_icon.png" alt="YouTube">
+            </a>
+            <a href="https://www.instagram.com/">
+                <!-- img from https://www.iconfinder.com/icons/5282544/camera_instagram_social_media_social_network_instagram_logo_icon -->
+                <img src="../assets/socialMedia/5282544_camera_instagram_social media_social network_instagram logo_icon.png" alt="Instagram">
+            </a>
+            <a href="https://www.reddit.com/">
+                <!-- img from https://www.iconfinder.com/icons/5282547/forum_reddit_reddit_logo_icon -->
+                <img src="../assets/socialMedia/5282547_forum_reddit_reddit logo_icon.png" alt="Reddit">
+            </a>
+        </div>
+    </footer>
+
+    <address style="display: none;">
+        viggo.strom@elev.ga.ntig.se
+        <a href="mailto:viggo.strom@elev.ga.ntig.se"></a>
+    </address>
+</body>
+
+</html>

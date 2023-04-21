@@ -94,14 +94,14 @@ const subQuestionGenerator = () => {
         return Math.floor(Math.random() * (topRange + 1))
     }
 
-    const number1 = randomNumber(10)
-    const number2 = randomNumber(10)
+    const number1 = randomNumber(10) - randomNumber(10)
+    const number2 = randomNumber(10) - randomNumber(10)
     const answer = number1 - number2
 
     for (let index = 0; index < question.answers.length; index++) {
-        question.answers[index] = randomNumber(20)
+        question.answers[index] = randomNumber(10) - randomNumber(10)
         while (question.answers[index] == answer) {
-            question.answers[index] = randomNumber(20)
+            question.answers[index] = randomNumber(10) - randomNumber(10)
         }
     }
 
@@ -186,12 +186,12 @@ const multDivQuestionGenerator = () => {
 }
 const addSubMultDivQuestionGenerator = () => {
     const selector = Math.floor(Math.random() * 4)
-    
+
     switch (selector) {
         case 0:
-            return addQuestionGenerator()    
+            return addQuestionGenerator()
         case 1:
-            return subQuestionGenerator()    
+            return subQuestionGenerator()
         case 2:
             return multQuestionGenerator()
         case 3:
@@ -199,6 +199,35 @@ const addSubMultDivQuestionGenerator = () => {
         default:
             break;
     }
+}
+const algebraQuestionGenerator = () => {
+    question = {
+        question: "",
+        answers: new Array(6),
+        correctAnswerIndex: 0
+    }
+
+    const randomNumber = (topRange) => {
+        return Math.floor(Math.random() * (topRange + 1))
+    }
+
+    const number1 = randomNumber(10)
+    const number2 = randomNumber(10)
+    const answer = number1 - number2
+
+   
+
+    for (let index = 0; index < question.answers.length; index++) {
+        question.answers[index] = randomNumber(20)
+        while (question.answers[index] == answer) {
+            question.answers[index] = randomNumber(20)
+        }
+    }
+
+    question.question = `${number1}-${number2}=?`
+    question.correctAnswerIndex = randomNumber(5)
+    question.answers[question.correctAnswerIndex] = answer
+    return question
 }
 
 
