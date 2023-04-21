@@ -72,9 +72,9 @@ const addQuestionGenerator = () => {
     const answer = number1 + number2
 
     for (let index = 0; index < question.answers.length; index++) {
-        question.answers[index] = randomNumber(10)
+        question.answers[index] = randomNumber(20)
         while (question.answers[index] == answer) {
-            question.answers[index] = randomNumber(10)
+            question.answers[index] = randomNumber(20)
         }
     }
 
@@ -98,8 +98,15 @@ const subQuestionGenerator = () => {
     const number2 = randomNumber(10)
     const answer = number1 - number2
 
+    for (let index = 0; index < question.answers.length; index++) {
+        question.answers[index] = randomNumber(20)
+        while (question.answers[index] == answer) {
+            question.answers[index] = randomNumber(20)
+        }
+    }
+
     question.question = `${number1}-${number2}=?`
-    question.correctAnswerIndex = randomNumber(6)
+    question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
     return question
 }
@@ -108,7 +115,6 @@ const addSubQuestionGenerator = () => {
         return addQuestionGenerator()
     }
     else {
-        return addQuestionGenerator()
         return subQuestionGenerator()
     }
 }
@@ -116,7 +122,7 @@ const multQuestionGenerator = () => {
     question = {
         question: "",
         answers: new Array(6),
-        correctAnswerIndex: 0,
+        correctAnswerIndex: 0
     }
 
     const randomNumber = (topRange) => {
@@ -127,10 +133,72 @@ const multQuestionGenerator = () => {
     const number2 = randomNumber(10)
     const answer = number1 * number2
 
+    for (let index = 0; index < question.answers.length; index++) {
+        question.answers[index] = randomNumber(30)
+        while (question.answers[index] == answer) {
+            question.answers[index] = randomNumber(20)
+        }
+    }
+
     question.question = `${number1}×${number2}=?`
-    question.correctAnswerIndex = randomNumber(6) - 1
+    question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
     return question
+}
+const divQuestionGenerator = () => {
+    question = {
+        question: "",
+        answers: new Array(6),
+        correctAnswerIndex: 0
+    }
+
+    const randomNumber = (topRange) => {
+        return Math.floor(Math.random() * (topRange + 1))
+    }
+
+    let number1 = randomNumber(15) + 1
+    let number2 = randomNumber(15) + 1
+    while (number1 % number2 != 0) {
+        number1 = randomNumber(15) + 1
+        number2 = randomNumber(15) + 1
+    }
+    const answer = number1 / number2
+
+    for (let index = 0; index < question.answers.length; index++) {
+        question.answers[index] = randomNumber(10)
+        while (question.answers[index] == answer) {
+            question.answers[index] = randomNumber(20)
+        }
+    }
+
+    question.question = `${number1}÷${number2}=?`
+    question.correctAnswerIndex = randomNumber(5)
+    question.answers[question.correctAnswerIndex] = answer
+    return question
+}
+const multDivQuestionGenerator = () => {
+    if (Math.round(Math.random()) == 1) {
+        return multQuestionGenerator()
+    }
+    else {
+        return divQuestionGenerator()
+    }
+}
+const addSubMultDivQuestionGenerator = () => {
+    const selector = Math.floor(Math.random() * 4)
+    
+    switch (selector) {
+        case 0:
+            return addQuestionGenerator()    
+        case 1:
+            return subQuestionGenerator()    
+        case 2:
+            return multQuestionGenerator()
+        case 3:
+            return divQuestionGenerator()
+        default:
+            break;
+    }
 }
 
 
@@ -191,6 +259,7 @@ const checkAnswer = (event) => {
             window.alert(`You lost. Score: ${currentScore}`)
         }
 
+        window.onbeforeunload = null
         window.location.replace("../index.html")
 
         // in case redirect fails
@@ -201,6 +270,6 @@ const checkAnswer = (event) => {
     }
 }
 
-// window.onbeforeunload = function(event) {
-//     return "string"
-// };
+window.onbeforeunload = function (event) {
+    return "string"
+};
