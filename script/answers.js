@@ -55,16 +55,18 @@ let currentQuestion = 0
 //     { question: "9×6=?", answers: ["54", "48", "63", "45", "36", "27"], correctAnswerIndex: 0 },
 // ]
 
+const randomNumber = (topRange) => {
+    return Math.floor(Math.random() * (topRange + 1))
+}
+const replaceSub = (int) => {
+    return int.toString().replace(/-/g, "–")
+}
 
 const addQuestionGenerator = () => {
     question = {
         question: "",
         answers: new Array(6),
         correctAnswerIndex: 0
-    }
-
-    const randomNumber = (topRange) => {
-        return Math.floor(Math.random() * (topRange + 1))
     }
 
     const number1 = randomNumber(10)
@@ -78,7 +80,7 @@ const addQuestionGenerator = () => {
         }
     }
 
-    question.question = `${number1}+${number2}=?`
+    question.question = `${replaceSub(number1)}+${replaceSub(number2)}=?`
     question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
     return question
@@ -88,10 +90,6 @@ const subQuestionGenerator = () => {
         question: "",
         answers: new Array(6),
         correctAnswerIndex: 0
-    }
-
-    const randomNumber = (topRange) => {
-        return Math.floor(Math.random() * (topRange + 1))
     }
 
     const number1 = randomNumber(10) - randomNumber(10)
@@ -105,7 +103,7 @@ const subQuestionGenerator = () => {
         }
     }
 
-    question.question = `${number1}-${number2}=?`
+    question.question = `${replaceSub(number1)}–${replaceSub(number2)}=?`
     question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
     return question
@@ -125,10 +123,6 @@ const multQuestionGenerator = () => {
         correctAnswerIndex: 0
     }
 
-    const randomNumber = (topRange) => {
-        return Math.floor(Math.random() * (topRange + 1))
-    }
-
     const number1 = randomNumber(10)
     const number2 = randomNumber(10)
     const answer = number1 * number2
@@ -140,7 +134,7 @@ const multQuestionGenerator = () => {
         }
     }
 
-    question.question = `${number1}×${number2}=?`
+    question.question = `${replaceSub(number1)}×${replaceSub(number2)}=?`
     question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
     return question
@@ -150,10 +144,6 @@ const divQuestionGenerator = () => {
         question: "",
         answers: new Array(6),
         correctAnswerIndex: 0
-    }
-
-    const randomNumber = (topRange) => {
-        return Math.floor(Math.random() * (topRange + 1))
     }
 
     let number1 = randomNumber(15) + 1
@@ -207,24 +197,34 @@ const algebraQuestionGenerator = () => {
         correctAnswerIndex: 0
     }
 
-    const randomNumber = (topRange) => {
-        return Math.floor(Math.random() * (topRange + 1))
-    }
+    const operator = "×"
 
     const number1 = randomNumber(10)
-    const number2 = randomNumber(10)
-    const answer = number1 - number2
+    const answer = randomNumber(10)
+    let number3
+    if (operator == "-") {
+        number3 = number1 - answer
+    }
+    else if (operator == "+") {
+        number3 = number1 + answer
+    }
+    else if (operator == "×") {
+        number3 = number1 * answer
+    }
+    else if (operator == "÷") {
+        number3 = number1 / answer
+    }
 
-   
 
+    // populating alternatives
     for (let index = 0; index < question.answers.length; index++) {
         question.answers[index] = randomNumber(20)
-        while (question.answers[index] == answer) {
+        while (question.answers[index] == number3) {
             question.answers[index] = randomNumber(20)
         }
     }
 
-    question.question = `${number1}-${number2}=?`
+    question.question = `${replaceSub(number1)}${replaceSub(operator).replace(/\*/g, "×")}x=${replaceSub(number3)}`
     question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
     return question
@@ -299,6 +299,6 @@ const checkAnswer = (event) => {
     }
 }
 
-window.onbeforeunload = function (event) {
-    return "string"
-};
+// window.onbeforeunload = function (event) {
+//     return "string"
+// };
