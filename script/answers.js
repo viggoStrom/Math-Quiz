@@ -22,6 +22,18 @@ const replaceSub = (int) => {
     return int.toString().replace(/-/g, "–")
 }
 
+const populateAlternatives = (question, answer, rangeHigh, rangeLow = 0) => {
+    for (let i = 0; i < question.answers.length; i++) {
+        ans = randomNumber(rangeHigh) - randomNumber(rangeLow)
+
+        while (ans == answer || question.answers.includes(ans) == true) {
+            ans = randomNumber(rangeHigh) - randomNumber(rangeLow)
+        }
+
+        question.answers[i] = ans
+    }
+}
+
 const addQuestionGenerator = () => {
     question = {
         question: "",
@@ -33,16 +45,12 @@ const addQuestionGenerator = () => {
     const number2 = randomNumber(10)
     const answer = number1 + number2
 
-    for (let index = 0; index < question.answers.length; index++) {
-        question.answers[index] = randomNumber(20)
-        while (question.answers[index] == answer) {
-            question.answers[index] = randomNumber(20)
-        }
-    }
+    populateAlternatives(question, answer, 10, -10)
 
     question.question = `${replaceSub(number1)}+${replaceSub(number2)}=?`
     question.correctAnswerIndex = randomNumber(5)
     question.answers[question.correctAnswerIndex] = answer
+
     return question
 }
 const subQuestionGenerator = () => {
@@ -56,12 +64,7 @@ const subQuestionGenerator = () => {
     const number2 = randomNumber(10) - randomNumber(10)
     const answer = number1 - number2
 
-    for (let index = 0; index < question.answers.length; index++) {
-        question.answers[index] = randomNumber(10) - randomNumber(10)
-        while (question.answers[index] == answer) {
-            question.answers[index] = randomNumber(10) - randomNumber(10)
-        }
-    }
+    populateAlternatives(question, answer, 10, -10)
 
     question.question = `${replaceSub(number1)}–${replaceSub(number2)}=?`
     question.correctAnswerIndex = randomNumber(5)
@@ -87,12 +90,7 @@ const multQuestionGenerator = () => {
     const number2 = randomNumber(10)
     const answer = number1 * number2
 
-    for (let index = 0; index < question.answers.length; index++) {
-        question.answers[index] = randomNumber(30)
-        while (question.answers[index] == answer) {
-            question.answers[index] = randomNumber(20)
-        }
-    }
+    populateAlternatives(question, answer, 30)
 
     question.question = `${replaceSub(number1)}×${replaceSub(number2)}=?`
     question.correctAnswerIndex = randomNumber(5)
@@ -114,12 +112,7 @@ const divQuestionGenerator = () => {
     }
     const answer = number1 / number2
 
-    for (let index = 0; index < question.answers.length; index++) {
-        question.answers[index] = randomNumber(10)
-        while (question.answers[index] == answer) {
-            question.answers[index] = randomNumber(20)
-        }
-    }
+    populateAlternatives(question, answer, 20)
 
     question.question = `${number1}÷${number2}=?`
     question.correctAnswerIndex = randomNumber(5)
@@ -185,13 +178,7 @@ const algebraQuestionGenerator = () => {
             break;
     }
 
-    // populating alternatives
-    for (let index = 0; index < question.answers.length; index++) {
-        question.answers[index] = randomNumber(20, true)
-        while (question.answers[index] == answer) {
-            question.answers[index] = randomNumber(20, true)
-        }
-    }
+    populateAlternatives(question, answer, 20)
 
     question.question = `${replaceSub(number1)}${replaceSub(operator).replace(/\*/g, "×")}x=${replaceSub(number3)}`
     question.correctAnswerIndex = randomNumber(5)
@@ -263,6 +250,6 @@ const checkAnswer = (event) => {
     }
 }
 
-window.onbeforeunload = function (event) {
-    return "string"
-};
+// window.onbeforeunload = function (event) {
+//     return "string"
+// };
