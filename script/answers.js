@@ -250,6 +250,6 @@ const checkAnswer = (event) => {
     }
 }
 
-// window.onbeforeunload = function (event) {
-//     return "string"
-// };
+window.onbeforeunload = function (event) {
+    return "string"
+};
